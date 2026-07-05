@@ -44,13 +44,42 @@ if st.button("Analyze Bug"):
 
     elif uploaded_file:
 
-        with open(
-            f"uploads/{uploaded_file.name}",
-            "wb"
-        ) as file:
+        file_path = f"uploads/{uploaded_file.name}"
+
+        # Save uploaded file
+        with open(file_path, "wb") as file:
             file.write(uploaded_file.getbuffer())
 
         st.success("File uploaded successfully!")
 
+        # Read TXT and LOG files
+        if uploaded_file.name.endswith((".txt", ".log")):
+
+            with open(
+                file_path,
+                "r",
+                encoding="utf-8",
+                errors="ignore"
+            ) as file:
+                file_text = file.read()
+
+            st.subheader("🔍 Similar Historical Bugs")
+
+            similar_bugs = search_bug(file_text)
+
+            for i, bug in enumerate(similar_bugs, start=1):
+                st.write(f"### Bug {i}")
+                st.write(bug)
+
+        # PDF support can be added later
+        elif uploaded_file.name.endswith(".pdf"):
+
+            st.info(
+                "PDF analysis will be added in a future update."
+            )
+
     else:
-        st.warning("Please paste a bug report or upload a file.")
+
+        st.warning(
+            "Please paste a bug report or upload a file."
+        )
