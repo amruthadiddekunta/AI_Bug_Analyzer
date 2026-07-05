@@ -21,12 +21,6 @@ This project is being developed as part of the **Infosys Springboard Internship*
 
 ---
 
-## 🏗️ System Architecture
-
-![Architecture](docs/Architecture.png)
-
----
-
 ## 🛠️ Tech Stack
 
 | Category | Technologies |
