@@ -8,6 +8,15 @@ __pycache__/
 # Uploaded files
 uploads/
 
+# ChromaDB
+chroma_db/
+
+# Dataset ZIP files
+*.zip
+
 # OS files
 .DS_Store
 Thumbs.db
+
+# Large Kaggle datasets
+data/archive/*.csv
