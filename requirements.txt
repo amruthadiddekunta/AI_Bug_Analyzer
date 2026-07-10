@@ -1,0 +1,8 @@
+streamlit
+chromadb
+sentence-transformers
+langchain
+langchain-text-splitters
+pandas
+numpy
+pypdf
