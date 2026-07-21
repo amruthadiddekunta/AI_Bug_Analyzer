@@ -4,7 +4,9 @@
 
 ## 1. Problem Statement
 
-Software developers spend significant time identifying similar historical bugs and understanding their root causes. Existing error messages are often technical and difficult to interpret. This project aims to simplify bug analysis using Artificial Intelligence and Retrieval-Augmented Generation (RAG).
+Software developers spend significant time identifying similar historical bugs, understanding stack traces, determining bug severity, and finding the affected software components. Existing error messages are often difficult to interpret, resulting in slower debugging and issue resolution.
+
+This project aims to simplify bug analysis using Artificial Intelligence, Retrieval-Augmented Generation (RAG), and a Multi-Agent Architecture.
 
 ---
 
@@ -12,67 +14,176 @@ Software developers spend significant time identifying similar historical bugs a
 
 The objective of this project is to develop an AI-powered system capable of:
 
-- Accepting bug reports
-- Building a historical defect knowledge base
-- Retrieving semantically similar bugs
-- Assisting developers in defect analysis
+- Accepting bug reports through text input or file upload
+- Building a Historical Defect Knowledge Base
+- Retrieving semantically similar historical bugs
+- Automatically classifying bug severity and priority
+- Identifying the affected component
+- Extracting exception details from stack traces
+- Producing structured outputs for downstream AI agents
 
 ---
 
 ## 3. System Architecture
 
-Modules:
+### Implemented Modules
 
 1. Bug Submission Module
 2. Historical Defect Knowledge Base
 3. RAG Retrieval Pipeline
 4. Semantic Similarity Search
-5. Result Display Module
+5. Triage Agent
+6. Log Analysis Agent
+7. Multi-Agent Orchestrator
+8. Result Display Module
+9. JSON Result Storage
 
-Future Modules:
+### Future Modules
 
-- Triage Agent
-- Duplicate Detection Agent
 - Root Cause Analysis Agent
-- Remediation Agent
-- Analytics Dashboard
+- Duplicate Detection Agent
+- Remediation Suggestion Agent
+- Defect Pattern Analytics Dashboard
+- LLM-based Bug Fix Recommendation Agent
 
 ---
 
 ## 4. Workflow
 
-1. User submits a bug report.
-2. The report is preprocessed.
-3. Text is converted into embeddings.
-4. ChromaDB performs semantic search.
-5. Top similar bugs are retrieved.
-6. Results are displayed in Streamlit.
+1. User submits a bug report or uploads a log file.
+2. The bug report is preprocessed.
+3. Text is converted into embeddings using Sentence Transformers.
+4. Embeddings are searched in ChromaDB using RAG.
+5. Similar historical bugs are retrieved.
+6. The Triage Agent predicts:
+   - Severity
+   - Priority
+   - Affected Component
+   - Confidence Score
+   - Reasoning
+7. The Log Analysis Agent extracts:
+   - Exception Type
+   - Failure Point
+   - Affected Code Path
+8. The Multi-Agent Orchestrator combines outputs from both agents.
+9. Results are stored in a structured JSON file.
+10. Results are displayed through the Streamlit interface.
 
 ---
 
 ## 5. Knowledge Base Design
 
-The knowledge base stores:
+The Historical Defect Knowledge Base stores:
 
-- Bug Description
-- Embedding Vector
 - Bug ID
+- Bug Description
+- Bug Summary
+- Embedding Vector
 
-The vector database enables semantic retrieval instead of keyword matching.
+The vector database enables semantic retrieval instead of traditional keyword matching.
 
 ---
 
-## 6. Technologies Used
+## 6. Multi-Agent Architecture
+
+### Triage Agent
+
+Responsibilities:
+
+- Predict Severity
+- Predict Priority
+- Identify Affected Component
+- Generate Confidence Score
+- Generate Reasoning
+
+Output:
+
+- Severity
+- Priority
+- Component
+- Confidence
+- Reasoning
+
+---
+
+### Log Analysis Agent
+
+Responsibilities:
+
+- Parse stack traces
+- Detect exception type
+- Identify failure point
+- Extract affected code path
+
+Output:
+
+- Exception Type
+- Failure Point
+- Affected Code Path
+
+---
+
+### Multi-Agent Orchestrator
+
+Responsibilities:
+
+- Execute Triage Agent
+- Execute Log Analysis Agent
+- Combine outputs
+- Store results for future milestones
+
+Output:
+
+- Structured JSON file (`bug_analysis.json`)
+
+---
+
+## 7. Validation
+
+Validation was performed using public Firefox and Chromium bug datasets.
+
+Validation includes:
+
+- Triage Agent execution
+- Log Analysis Agent execution
+- Multi-Agent orchestration
+- Structured JSON generation
+
+---
+
+## 8. Technologies Used
 
 - Python
 - Streamlit
-- ChromaDB
 - Sentence Transformers
-- Pandas
+- ChromaDB
 - LangChain
+- Pandas
+- Git
+- GitHub
 
 ---
 
-## 7. Expected Outcome
+## 9. Expected Outcome
 
-The system retrieves the most relevant historical bugs for a newly submitted bug report, reducing manual effort in defect analysis and improving debugging efficiency.
+The system assists developers by:
+
+- Retrieving similar historical bugs
+- Predicting bug severity and priority
+- Identifying affected components
+- Extracting exception details from stack traces
+- Producing structured outputs for downstream AI agents
+
+This reduces manual debugging effort and improves software maintenance efficiency.
+
+---
+
+## 10. Future Scope
+
+Future milestones will introduce:
+
+- Root Cause Analysis Agent
+- Duplicate Detection Agent
+- Remediation Suggestion Agent
+- Defect Analytics Dashboard
+- LLM-powered Bug Fix Recommendations

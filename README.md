@@ -2,7 +2,7 @@
 
 ## 📌 Project Overview
 
-AI Bug Analyzer & Fix Advisor is an AI-powered application that assists developers in analyzing software bug reports using **Retrieval-Augmented Generation (RAG)**. The system accepts bug reports through direct text input or file uploads, preprocesses them, and retrieves semantically similar historical bug reports from a vector database to help identify duplicate issues and understand recurring software defects.
+AI Bug Analyzer & Fix Advisor is an AI-powered application that assists developers in analyzing software bug reports using **Retrieval-Augmented Generation (RAG)** and a **Multi-Agent Architecture**. The system accepts bug reports through direct text input or file uploads, retrieves semantically similar historical defects, classifies bugs using intelligent agents, analyzes error logs, and stores structured outputs for downstream analysis.
 
 This project is being developed as part of the **Infosys Springboard Internship**.
 
@@ -12,11 +12,16 @@ This project is being developed as part of the **Infosys Springboard Internship*
 
 - 📝 Paste bug reports directly
 - 📂 Upload bug reports, log files, or PDFs
-- 🧹 Data preprocessing and chunking
+- 🧹 Data preprocessing and text chunking
 - 🧠 Sentence Transformer embedding generation
 - 🗂️ Historical Defect Knowledge Base
 - 🔍 Semantic similarity search using RAG
+- 🚦 Triage Agent for bug classification
+- 📄 Log Analysis Agent for stack trace analysis
+- 🤖 Multi-Agent Orchestration
 - 💾 ChromaDB vector database
+- 📊 Structured JSON output for downstream agents
+- ✅ Validation using Firefox and Chromium datasets
 - 🌐 Interactive Streamlit web interface
 
 ---
@@ -32,6 +37,7 @@ This project is being developed as part of the **Infosys Springboard Internship*
 | Embedding Model | Sentence Transformers (all-MiniLM-L6-v2) |
 | Vector Database | ChromaDB |
 | Retrieval | Retrieval-Augmented Generation (RAG) |
+| AI Architecture | Multi-Agent System |
 | Version Control | Git & GitHub |
 
 ---
@@ -40,10 +46,12 @@ This project is being developed as part of the **Infosys Springboard Internship*
 
 The Historical Defect Knowledge Base is built using public software bug datasets.
 
-- Chromium Bug Reports (Kaggle)
-- Firefox Bug Reports (Kaggle)
+Datasets Used:
 
-> **Note:** Large datasets are not included in this repository because they exceed GitHub's file size limits. Download them separately and place them inside the `data/` directory.
+- Firefox Bug Reports (Kaggle)
+- Chromium Bug Reports (Kaggle)
+
+> **Note:** Due to GitHub file size limitations, only sample datasets are included in this repository. Download the complete datasets separately and place them inside the `data/` directory.
 
 ---
 
@@ -51,6 +59,12 @@ The Historical Defect Knowledge Base is built using public software bug datasets
 
 ```text
 AI_Bug_Analyzer/
+│
+├── agents/
+│   ├── __init__.py
+│   ├── triage_agent.py
+│   ├── log_analysis_agent.py
+│   └── orchestrator.py
 │
 ├── data/
 │   ├── archive/
@@ -67,14 +81,23 @@ AI_Bug_Analyzer/
 │   ├── retrieval.py
 │   └── vector_store.py
 │
+├── utils/
+│   ├── __init__.py
+│   └── save_results.py
+│
 ├── uploads/
 │
+├── results/
+│   └── bug_analysis.json
+│
+├── validate_agents.py
 ├── main.py
-├── test_dataset.py
 ├── requirements.txt
 ├── README.md
 └── .gitignore
 ```
+
+---
 
 ## 🏗️ System Architecture
 
@@ -93,7 +116,7 @@ cd AI_Bug_Analyzer
 
 ## ⚙️ Installation
 
-Create and activate a virtual environment:
+Create and activate a virtual environment.
 
 ### Windows
 
@@ -102,7 +125,7 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-Install the required packages:
+Install the required packages.
 
 ```bash
 pip install -r requirements.txt
@@ -111,8 +134,6 @@ pip install -r requirements.txt
 ---
 
 ## ▶️ Run the Application
-
-Start the Streamlit application:
 
 ```bash
 streamlit run main.py
@@ -124,7 +145,7 @@ streamlit run main.py
 
 ### ✅ Milestone 1 Completed
 
-Implemented features:
+Implemented:
 
 - Bug Submission Module
 - File Upload Support
@@ -140,14 +161,43 @@ Implemented features:
 - System Architecture
 - Technical Documentation
 
+### ✅ Milestone 2 Completed
+
+Implemented:
+
+- Triage Agent
+- Log Analysis Agent
+- Multi-Agent Orchestration
+- Severity Prediction
+- Priority Prediction
+- Component Identification
+- Confidence Score Generation
+- Reasoning Generation
+- Exception Type Extraction
+- Failure Point Identification
+- Affected Code Path Extraction
+- Structured JSON Output
+- Agent Validation using Firefox and Chromium datasets
+
+---
+
+## 📊 Validation
+
+Milestone 2 agents were validated using public Firefox and Chromium bug datasets.
+
+Validation includes:
+
+- Triage Agent execution
+- Log Analysis Agent execution
+- Multi-Agent pipeline validation
+- Structured output generation
+
 ---
 
 ## 🔮 Future Enhancements
 
 The following modules will be implemented in upcoming milestones:
 
-- 🤖 Triage Agent
-- 📑 Log Analysis Agent
 - 🔍 Root Cause Analysis Agent
 - 🔄 Duplicate Detection Agent
 - 💡 Remediation Suggestion Agent

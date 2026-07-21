@@ -11,6 +11,9 @@ uploads/
 # ChromaDB
 chroma_db/
 
+# Generated results
+results/
+
 # Dataset ZIP files
 *.zip
 
