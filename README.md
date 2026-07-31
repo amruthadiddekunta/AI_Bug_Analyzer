@@ -2,36 +2,41 @@
 
 ## 📌 Project Overview
 
-AI Bug Analyzer & Fix Advisor is an AI-powered application that assists developers in analyzing software bug reports using **Retrieval-Augmented Generation (RAG)** and a **Multi-Agent Architecture**. The system accepts bug reports through direct text input or file uploads, retrieves semantically similar historical defects, classifies bugs using intelligent agents, analyzes error logs, and stores structured outputs for downstream analysis.
+AI Bug Analyzer & Fix Advisor is an AI-powered application that assists developers in analyzing software bug reports using **Retrieval-Augmented Generation (RAG)** and a **Multi-Agent Architecture**.
 
-This project is being developed as part of the **Infosys Springboard Internship**.
+The system accepts bug reports through direct text input or file uploads, retrieves semantically similar historical defects, classifies bug severity and priority, analyzes stack traces, identifies probable root causes, detects duplicate issues, and recommends possible fixes using multiple AI agents.
+
+This project is developed as part of the **Infosys Springboard Internship**.
 
 ---
 
-## ✨ Features
+# ✨ Features
 
 - 📝 Paste bug reports directly
-- 📂 Upload bug reports, log files, or PDFs
+- 📂 Upload bug reports, log files, or PDF files
 - 🧹 Data preprocessing and text chunking
 - 🧠 Sentence Transformer embedding generation
 - 🗂️ Historical Defect Knowledge Base
 - 🔍 Semantic similarity search using RAG
-- 🚦 Triage Agent for bug classification
-- 📄 Log Analysis Agent for stack trace analysis
-- 🤖 Multi-Agent Orchestration
-- 💾 ChromaDB vector database
-- 📊 Structured JSON output for downstream agents
-- ✅ Validation using Firefox and Chromium datasets
-- 🌐 Interactive Streamlit web interface
+- 🚦 Triage Agent
+- 📄 Log Analysis Agent
+- 🧠 Root Cause Analysis Agent
+- 🔁 Duplicate Detection Agent
+- 💡 Remediation Agent
+- 🤖 Multi-Agent Orchestrator
+- 💾 ChromaDB Vector Database
+- 📊 Structured JSON Output
+- 🌐 Interactive Streamlit Dashboard
 
 ---
 
-## 🛠️ Tech Stack
+# 🛠️ Tech Stack
 
 | Category | Technologies |
 |----------|--------------|
 | Programming Language | Python |
 | Frontend | Streamlit |
+| Backend | Python |
 | Data Processing | Pandas |
 | Text Chunking | LangChain RecursiveCharacterTextSplitter |
 | Embedding Model | Sentence Transformers (all-MiniLM-L6-v2) |
@@ -42,11 +47,11 @@ This project is being developed as part of the **Infosys Springboard Internship*
 
 ---
 
-## 📂 Datasets
+# 📂 Datasets
 
 The Historical Defect Knowledge Base is built using public software bug datasets.
 
-Datasets Used:
+Datasets Used
 
 - Firefox Bug Reports (Kaggle)
 - Chromium Bug Reports (Kaggle)
@@ -55,7 +60,7 @@ Datasets Used:
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ```text
 AI_Bug_Analyzer/
@@ -64,6 +69,9 @@ AI_Bug_Analyzer/
 │   ├── __init__.py
 │   ├── triage_agent.py
 │   ├── log_analysis_agent.py
+│   ├── root_cause_agent.py
+│   ├── duplicate_agent.py
+│   ├── remediation_agent.py
 │   └── orchestrator.py
 │
 ├── data/
@@ -99,13 +107,13 @@ AI_Bug_Analyzer/
 
 ---
 
-## 🏗️ System Architecture
+# 🏗️ System Architecture
 
 ![Architecture](docs/Architecture.png)
 
 ---
 
-## 📥 Clone the Repository
+# 📥 Clone the Repository
 
 ```bash
 git clone https://github.com/amruthadiddekunta/AI_Bug_Analyzer.git
@@ -114,7 +122,7 @@ cd AI_Bug_Analyzer
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
 Create and activate a virtual environment.
 
@@ -133,7 +141,7 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Run the Application
+# ▶️ Run the Application
 
 ```bash
 streamlit run main.py
@@ -141,9 +149,9 @@ streamlit run main.py
 
 ---
 
-## 📌 Current Progress
+# 📌 Current Progress
 
-### ✅ Milestone 1 Completed
+## ✅ Milestone 1 Completed
 
 Implemented:
 
@@ -161,7 +169,9 @@ Implemented:
 - System Architecture
 - Technical Documentation
 
-### ✅ Milestone 2 Completed
+---
+
+## ✅ Milestone 2 Completed
 
 Implemented:
 
@@ -181,32 +191,55 @@ Implemented:
 
 ---
 
-## 📊 Validation
+## ✅ Milestone 3 Completed
 
-Milestone 2 agents were validated using public Firefox and Chromium bug datasets.
+Implemented:
+
+- Root Cause Analysis Agent
+- Duplicate Detection Agent
+- Remediation Agent
+- Structured Findings Dashboard
+- Root Cause Hypothesis Generation
+- Confidence Score Generation
+- Supporting Historical Evidence
+- Semantic Duplicate Detection
+- Similarity Score Generation
+- Historical Resolution Summaries
+- Fix Recommendation Generation
+- End-to-End Multi-Agent Pipeline
+
+---
+
+# 📊 Validation
+
+The complete multi-agent pipeline was validated using Firefox and Chromium bug datasets.
 
 Validation includes:
 
-- Triage Agent execution
-- Log Analysis Agent execution
-- Multi-Agent pipeline validation
-- Structured output generation
+- RAG Retrieval Pipeline
+- Triage Agent
+- Log Analysis Agent
+- Root Cause Agent
+- Duplicate Detection Agent
+- Remediation Agent
+- Multi-Agent Orchestration
+- Structured JSON Output
 
 ---
 
-## 🔮 Future Enhancements
+# 🔮 Future Enhancements
 
-The following modules will be implemented in upcoming milestones:
-
-- 🔍 Root Cause Analysis Agent
-- 🔄 Duplicate Detection Agent
-- 💡 Remediation Suggestion Agent
-- 📊 Defect Pattern Analytics Dashboard
-- 🧠 LLM-based Bug Fix Recommendations
+- 🤖 LLM-powered Root Cause Analysis
+- 💡 LLM-based Bug Fix Recommendations
+- 📊 Defect Analytics Dashboard
+- 📈 Bug Trend Visualization
+- 🔄 Continuous Learning Knowledge Base
+- ☁️ Cloud Deployment
+- 🔗 REST API Integration
 
 ---
 
-## 👩‍💻 Developed By
+# 👩‍💻 Developed By
 
 **Diddekunta Amrutha**
 
@@ -216,6 +249,6 @@ Nitte Meenakshi Institute of Technology, Bengaluru
 
 ---
 
-## 📄 License
+# 📄 License
 
 This project is developed for academic and educational purposes as part of the Infosys Springboard Internship Program.

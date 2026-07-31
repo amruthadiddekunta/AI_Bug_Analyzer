@@ -4,9 +4,9 @@
 
 ## 1. Problem Statement
 
-Software developers spend significant time identifying similar historical bugs, understanding stack traces, determining bug severity, and finding the affected software components. Existing error messages are often difficult to interpret, resulting in slower debugging and issue resolution.
+Software developers spend significant time identifying similar historical bugs, understanding stack traces, determining bug severity, identifying probable root causes, detecting duplicate issues, and deciding on appropriate fixes. Existing debugging processes are often manual and time-consuming, resulting in slower issue resolution.
 
-This project aims to simplify bug analysis using Artificial Intelligence, Retrieval-Augmented Generation (RAG), and a Multi-Agent Architecture.
+This project aims to simplify software bug analysis using Artificial Intelligence, Retrieval-Augmented Generation (RAG), and a Multi-Agent Architecture.
 
 ---
 
@@ -18,8 +18,11 @@ The objective of this project is to develop an AI-powered system capable of:
 - Building a Historical Defect Knowledge Base
 - Retrieving semantically similar historical bugs
 - Automatically classifying bug severity and priority
-- Identifying the affected component
+- Identifying the affected software component
 - Extracting exception details from stack traces
+- Identifying the most probable root cause
+- Detecting duplicate historical bugs
+- Generating remediation recommendations
 - Producing structured outputs for downstream AI agents
 
 ---
@@ -34,17 +37,21 @@ The objective of this project is to develop an AI-powered system capable of:
 4. Semantic Similarity Search
 5. Triage Agent
 6. Log Analysis Agent
-7. Multi-Agent Orchestrator
-8. Result Display Module
-9. JSON Result Storage
+7. Root Cause Analysis Agent
+8. Duplicate Detection Agent
+9. Remediation Agent
+10. Multi-Agent Orchestrator
+11. Structured Findings Dashboard
+12. JSON Result Storage
 
 ### Future Modules
 
-- Root Cause Analysis Agent
-- Duplicate Detection Agent
-- Remediation Suggestion Agent
-- Defect Pattern Analytics Dashboard
-- LLM-based Bug Fix Recommendation Agent
+- LLM-based Root Cause Analysis
+- Intelligent Bug Fix Recommendation using LLMs
+- Defect Analytics Dashboard
+- Bug Trend Visualization
+- Cloud Deployment
+- REST API Integration
 
 ---
 
@@ -65,9 +72,15 @@ The objective of this project is to develop an AI-powered system capable of:
    - Exception Type
    - Failure Point
    - Affected Code Path
-8. The Multi-Agent Orchestrator combines outputs from both agents.
-9. Results are stored in a structured JSON file.
-10. Results are displayed through the Streamlit interface.
+8. The Root Cause Analysis Agent analyzes the retrieved historical bugs and generates:
+   - Root Cause Hypothesis
+   - Confidence Score
+   - Supporting Historical Evidence
+9. The Duplicate Detection Agent retrieves the top matching historical bugs with similarity scores and resolution summaries.
+10. The Remediation Agent generates fix recommendations based on the identified root cause and historical bug resolutions.
+11. The Multi-Agent Orchestrator combines the outputs from all agents.
+12. Results are stored in a structured JSON file.
+13. Results are displayed through the Streamlit dashboard.
 
 ---
 
@@ -88,7 +101,7 @@ The vector database enables semantic retrieval instead of traditional keyword ma
 
 ### Triage Agent
 
-Responsibilities:
+Responsibilities
 
 - Predict Severity
 - Predict Priority
@@ -96,7 +109,7 @@ Responsibilities:
 - Generate Confidence Score
 - Generate Reasoning
 
-Output:
+Output
 
 - Severity
 - Priority
@@ -108,14 +121,14 @@ Output:
 
 ### Log Analysis Agent
 
-Responsibilities:
+Responsibilities
 
-- Parse stack traces
-- Detect exception type
-- Identify failure point
-- Extract affected code path
+- Parse Stack Traces
+- Detect Exception Type
+- Identify Failure Point
+- Extract Affected Code Path
 
-Output:
+Output
 
 - Exception Type
 - Failure Point
@@ -123,18 +136,72 @@ Output:
 
 ---
 
+### Root Cause Analysis Agent
+
+Responsibilities
+
+- Analyze the submitted bug
+- Retrieve related historical bugs
+- Generate the most probable root cause
+- Produce a confidence score
+- Provide supporting historical evidence
+
+Output
+
+- Root Cause Hypothesis
+- Confidence Score
+- Supporting Historical Evidence
+
+---
+
+### Duplicate Detection Agent
+
+Responsibilities
+
+- Perform semantic similarity search
+- Retrieve top matching historical bugs
+- Calculate similarity scores
+- Display historical resolution summaries
+
+Output
+
+- Duplicate Bugs
+- Similarity Scores
+- Resolution Summaries
+
+---
+
+### Remediation Agent
+
+Responsibilities
+
+- Analyze root cause
+- Review historical bug resolutions
+- Generate actionable fix recommendations
+- Recommend engineering best practices
+
+Output
+
+- Recommended Fix
+- Recommendation Basis
+
+---
+
 ### Multi-Agent Orchestrator
 
-Responsibilities:
+Responsibilities
 
 - Execute Triage Agent
 - Execute Log Analysis Agent
-- Combine outputs
-- Store results for future milestones
+- Execute Root Cause Analysis Agent
+- Execute Duplicate Detection Agent
+- Execute Remediation Agent
+- Combine all outputs
+- Store structured results
 
-Output:
+Output
 
-- Structured JSON file (`bug_analysis.json`)
+- Structured JSON File (`bug_analysis.json`)
 
 ---
 
@@ -144,10 +211,14 @@ Validation was performed using public Firefox and Chromium bug datasets.
 
 Validation includes:
 
-- Triage Agent execution
-- Log Analysis Agent execution
-- Multi-Agent orchestration
-- Structured JSON generation
+- RAG Retrieval Validation
+- Triage Agent Validation
+- Log Analysis Agent Validation
+- Root Cause Agent Validation
+- Duplicate Detection Validation
+- Remediation Agent Validation
+- Multi-Agent Pipeline Validation
+- Structured JSON Generation
 
 ---
 
@@ -170,20 +241,25 @@ The system assists developers by:
 
 - Retrieving similar historical bugs
 - Predicting bug severity and priority
-- Identifying affected components
+- Identifying affected software components
 - Extracting exception details from stack traces
+- Identifying probable root causes
+- Detecting duplicate historical bugs
+- Recommending possible fixes
 - Producing structured outputs for downstream AI agents
 
-This reduces manual debugging effort and improves software maintenance efficiency.
+This reduces manual debugging effort, improves software maintenance, and accelerates issue resolution.
 
 ---
 
 ## 10. Future Scope
 
-Future milestones will introduce:
+Future improvements include:
 
-- Root Cause Analysis Agent
-- Duplicate Detection Agent
-- Remediation Suggestion Agent
+- LLM-powered Root Cause Analysis
+- Intelligent Bug Fix Recommendations
 - Defect Analytics Dashboard
-- LLM-powered Bug Fix Recommendations
+- Bug Trend Visualization
+- Continuous Learning Knowledge Base
+- Cloud Deployment
+- REST API Integration

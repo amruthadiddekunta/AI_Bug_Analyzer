@@ -35,6 +35,9 @@ Features:
 • Retrieval-Augmented Generation (RAG)
 • Triage Agent
 • Log Analysis Agent
+• Root Cause Agent
+• Duplicate Detection Agent
+• Remediation Agent
 • Multi-Agent Orchestrator
 """)
 
@@ -52,8 +55,9 @@ Features:
 
     st.subheader("Milestones")
 
-    st.success("Milestone 1")
-    st.success("Milestone 2")
+    st.success("✅ Milestone 1")
+    st.success("✅ Milestone 2")
+    st.info("🚀 Milestone 3")
 
     st.markdown("---")
 
@@ -89,8 +93,7 @@ uploaded_file = st.file_uploader(
 )
 
 if st.button("🚀 Analyze Bug"):
-
-    # =====================================================
+        # =====================================================
     # TEXT INPUT
     # =====================================================
 
@@ -107,26 +110,42 @@ if st.button("🚀 Analyze Bug"):
         st.toast("Bug submitted successfully!")
         st.success("Bug submitted successfully!")
 
-        with st.spinner("Searching historical bugs..."):
+        with st.spinner("Analyzing bug report..."):
 
-            similar_bugs = search_bug(bug_text)
-
-        analysis = analyze_submission(bug_text)
+            analysis = analyze_submission(bug_text)
 
         save_analysis(analysis)
 
         st.success("Analysis saved successfully!")
         st.caption("Saved as: results/bug_analysis.json")
 
+        # -----------------------------------
+        # Similar Historical Bugs
+        # -----------------------------------
+
         st.markdown("---")
 
         st.subheader("🔍 Similar Historical Bugs")
 
-        for i, bug in enumerate(similar_bugs, start=1):
+        for i, bug in enumerate(
+            analysis["duplicates"],
+            start=1
+        ):
 
-            with st.expander(f"🐞 Similar Bug {i}"):
+            with st.expander(
+                f"🐞 Similar Bug {i}"
+            ):
 
-                st.write(bug)
+                st.write(bug["summary"])
+
+                st.write(
+                    f"Similarity Score: "
+                    f"{bug['similarity_score']:.2f}"
+                )
+
+        # -----------------------------------
+        # Triage Analysis
+        # -----------------------------------
 
         st.markdown("---")
 
@@ -151,17 +170,19 @@ if st.button("🚀 Analyze Bug"):
 
         confidence = analysis["triage"]["confidence"]
 
-        st.write("### Confidence Score")
+        st.write("### Confidence")
 
         st.progress(confidence)
 
         st.write(f"{confidence*100:.0f}%")
 
-        st.write("### Reasoning")
-
         st.info(
             analysis["triage"]["reasoning"]
         )
+
+        # -----------------------------------
+        # Log Analysis
+        # -----------------------------------
 
         st.markdown("---")
 
@@ -171,26 +192,105 @@ if st.button("🚀 Analyze Bug"):
 
         with left:
 
-            st.write("### Exception Type")
-
             st.success(
                 analysis["log_analysis"]["exception_type"]
             )
 
         with right:
 
-            st.write("### Failure Point")
-
             st.success(
                 analysis["log_analysis"]["failure_point"]
             )
 
-        st.write("### Affected Code Path")
-
         st.code(
-            analysis["log_analysis"]["affected_code_path"]
+            analysis["log_analysis"][
+                "affected_code_path"
+            ]
         )
-    # =====================================================
+
+        # -----------------------------------
+        # Root Cause
+        # -----------------------------------
+
+        st.markdown("---")
+
+        st.subheader("🧠 Root Cause Analysis")
+
+        st.warning(
+            analysis["root_cause"]["root_cause"]
+        )
+
+        rc = analysis["root_cause"]["confidence"]
+
+        st.write("Confidence")
+
+        st.progress(rc)
+
+        st.write(f"{rc*100:.0f}%")
+
+        st.write("Supporting Evidence")
+
+        st.info(
+            analysis["root_cause"][
+                "supporting_evidence"
+            ]
+        )
+
+        # -----------------------------------
+        # Duplicate Detection
+        # -----------------------------------
+
+        st.markdown("---")
+
+        st.subheader("🔁 Duplicate Detection")
+
+        for i, bug in enumerate(
+            analysis["duplicates"],
+            start=1
+        ):
+
+            with st.expander(
+                f"Duplicate {i}"
+            ):
+
+                st.write(
+                    bug["summary"]
+                )
+
+                st.progress(
+                    bug["similarity_score"]
+                )
+
+                st.write(
+                    f"{bug['similarity_score']*100:.0f}% Similar"
+                )
+
+                st.success(
+                    bug["resolution_summary"]
+                )
+
+        # -----------------------------------
+        # Remediation
+        # -----------------------------------
+
+        st.markdown("---")
+
+        st.subheader("💡 Recommended Fix")
+
+        st.success(
+            analysis["remediation"][
+                "recommendation"
+            ]
+        )
+
+        st.write("Based On")
+
+        st.info(
+            analysis["remediation"][
+                "based_on"
+            ]
+        )
+            # =====================================================
     # FILE UPLOAD
     # =====================================================
 
@@ -199,7 +299,6 @@ if st.button("🚀 Analyze Bug"):
         file_path = f"uploads/{uploaded_file.name}"
 
         with open(file_path, "wb") as file:
-
             file.write(uploaded_file.getbuffer())
 
         st.toast("File uploaded successfully!")
@@ -216,26 +315,42 @@ if st.button("🚀 Analyze Bug"):
 
                 file_text = file.read()
 
-            with st.spinner("Searching historical bugs..."):
+            with st.spinner("Analyzing bug report..."):
 
-                similar_bugs = search_bug(file_text)
-
-            analysis = analyze_submission(file_text)
+                analysis = analyze_submission(file_text)
 
             save_analysis(analysis)
 
             st.success("Analysis saved successfully!")
             st.caption("Saved as: results/bug_analysis.json")
 
+            # -----------------------------------
+            # Similar Historical Bugs
+            # -----------------------------------
+
             st.markdown("---")
 
             st.subheader("🔍 Similar Historical Bugs")
 
-            for i, bug in enumerate(similar_bugs, start=1):
+            for i, bug in enumerate(
+                analysis["duplicates"],
+                start=1
+            ):
 
-                with st.expander(f"🐞 Similar Bug {i}"):
+                with st.expander(
+                    f"🐞 Similar Bug {i}"
+                ):
 
-                    st.write(bug)
+                    st.write(bug["summary"])
+
+                    st.write(
+                        f"Similarity Score: "
+                        f"{bug['similarity_score']:.2f}"
+                    )
+
+            # -----------------------------------
+            # Triage Analysis
+            # -----------------------------------
 
             st.markdown("---")
 
@@ -260,17 +375,19 @@ if st.button("🚀 Analyze Bug"):
 
             confidence = analysis["triage"]["confidence"]
 
-            st.write("### Confidence Score")
+            st.write("### Confidence")
 
             st.progress(confidence)
 
             st.write(f"{confidence*100:.0f}%")
 
-            st.write("### Reasoning")
-
             st.info(
                 analysis["triage"]["reasoning"]
             )
+
+            # -----------------------------------
+            # Log Analysis
+            # -----------------------------------
 
             st.markdown("---")
 
@@ -280,24 +397,103 @@ if st.button("🚀 Analyze Bug"):
 
             with left:
 
-                st.write("### Exception Type")
-
                 st.success(
                     analysis["log_analysis"]["exception_type"]
                 )
 
             with right:
 
-                st.write("### Failure Point")
-
                 st.success(
                     analysis["log_analysis"]["failure_point"]
                 )
 
-            st.write("### Affected Code Path")
-
             st.code(
-                analysis["log_analysis"]["affected_code_path"]
+                analysis["log_analysis"][
+                    "affected_code_path"
+                ]
+            )
+
+            # -----------------------------------
+            # Root Cause
+            # -----------------------------------
+
+            st.markdown("---")
+
+            st.subheader("🧠 Root Cause Analysis")
+
+            st.warning(
+                analysis["root_cause"]["root_cause"]
+            )
+
+            rc = analysis["root_cause"]["confidence"]
+
+            st.write("Confidence")
+
+            st.progress(rc)
+
+            st.write(f"{rc*100:.0f}%")
+
+            st.write("Supporting Evidence")
+
+            st.info(
+                analysis["root_cause"][
+                    "supporting_evidence"
+                ]
+            )
+
+            # -----------------------------------
+            # Duplicate Detection
+            # -----------------------------------
+
+            st.markdown("---")
+
+            st.subheader("🔁 Duplicate Detection")
+
+            for i, bug in enumerate(
+                analysis["duplicates"],
+                start=1
+            ):
+
+                with st.expander(
+                    f"Duplicate {i}"
+                ):
+
+                    st.write(
+                        bug["summary"]
+                    )
+
+                    st.progress(
+                        bug["similarity_score"]
+                    )
+
+                    st.write(
+                        f"{bug['similarity_score']*100:.0f}% Similar"
+                    )
+
+                    st.success(
+                        bug["resolution_summary"]
+                    )
+
+            # -----------------------------------
+            # Remediation
+            # -----------------------------------
+
+            st.markdown("---")
+
+            st.subheader("💡 Recommended Fix")
+
+            st.success(
+                analysis["remediation"][
+                    "recommendation"
+                ]
+            )
+
+            st.write("Based On")
+
+            st.info(
+                analysis["remediation"][
+                    "based_on"
+                ]
             )
 
         elif uploaded_file.name.endswith(".pdf"):
@@ -311,6 +507,7 @@ if st.button("🚀 Analyze Bug"):
         st.warning(
             "Please paste a bug report or upload a file."
         )
+
 # =====================================================
 # Footer
 # =====================================================
@@ -330,7 +527,7 @@ st.markdown(
 <div style="text-align:center; padding:10px;">
     <b>Developed by Diddekunta Amrutha</b><br>
     Computer Science & Engineering<br>
-    Infosys SpringBoard
+    Infosys Springboard Internship Project
 </div>
 """,
     unsafe_allow_html=True,
