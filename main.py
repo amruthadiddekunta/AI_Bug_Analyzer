@@ -77,7 +77,7 @@ Features:
     st.success("✅ Milestone 1")
     st.success("✅ Milestone 2")
     st.success("✅ Milestone 3")
-    st.info("🚀 Milestone 4")
+    st.success("✅ Milestone 4")
 
     st.markdown("---")
 
