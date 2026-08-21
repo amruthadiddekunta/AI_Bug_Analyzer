@@ -148,6 +148,13 @@ streamlit run main.py
 ```
 
 ---
+## 🌐 Live Demo
+
+The application is deployed using Streamlit Community Cloud.
+
+👉 **Live Application:** https://aibuganalyzer-6eni8buuquzbrvfawdjivu.streamlit.app/
+
+The deployed application allows users to submit bug reports, upload log/bug files, perform semantic retrieval, and view the multi-agent analysis through the Streamlit dashboard.
 
 # 📌 Current Progress
 
@@ -210,6 +217,25 @@ Implemented:
 
 ---
 
+## ✅ Milestone 4 Completed
+
+Implemented:
+
+- Defect Pattern Analytics Module
+- Recurring Bug Theme Identification
+- Frequently Affected Component Analysis
+- Severity Trend Analysis
+- Systemic Issue Pattern Identification
+- Knowledge Base Growth Mechanism
+- Verified Bug and Confirmed Fix Storage
+- End-to-End Testing Across Varied Bug Types
+- Agent Accuracy and Duplicate Detection Validation
+- Recommendation Relevance Validation
+- Technical Documentation
+- Project Report
+- Final Demonstration with Five Distinct Bug Submissions
+- Complete Multi-Agent Pipeline Validation
+
 # 📊 Validation
 
 The complete multi-agent pipeline was validated using Firefox and Chromium bug datasets.
@@ -227,25 +253,13 @@ Validation includes:
 
 ---
 
-# 🔮 Future Enhancements
-
-- 🤖 LLM-powered Root Cause Analysis
-- 💡 LLM-based Bug Fix Recommendations
-- 📊 Defect Analytics Dashboard
-- 📈 Bug Trend Visualization
-- 🔄 Continuous Learning Knowledge Base
-- ☁️ Cloud Deployment
-- 🔗 REST API Integration
-
----
-
 # 👩‍💻 Developed By
 
 **Diddekunta Amrutha**
 
 Bachelor of Engineering (Computer Science and Engineering)
 
-Nitte Meenakshi Institute of Technology, Bengaluru
+Infosys SpringBoard Intern
 
 ---
 
